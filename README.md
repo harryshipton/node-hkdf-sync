@@ -12,11 +12,10 @@ spec: https://tools.ietf.org/html/rfc5869
 
     const HKDF = require('hkdf');
     
+    // `key` is a Buffer, that can be serialized however one desires
     var hkdf = new HKDF('sha256', 'salt123', 'initialKeyingMaterial');
-    hkdf.derive('info', 42, function(key) {
-      // key is a Buffer, that can be serialized however one desires
-      console.log(key.toString('hex'));
-    });
+    var key = hkdf.derive('info', 42);
+    key.toString('hex');
     
 ## license
 
