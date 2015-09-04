@@ -1,5 +1,5 @@
 {
-  "name"         : "node-hkdf",
+  "name"         : "node-hkdf-sync",
   "version"      : "1.0.0",
   "description"  : "Synchronous HKDF key derivation function",
   "main"         : "index",
