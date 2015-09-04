@@ -10,10 +10,8 @@ suite.addBatch({
     topic: function() {
       var self = this;
       var hkdf = new HKDF('sha256', 'salt123', 'initialKeyingMaterial');
-      hkdf.derive('info', 42, function(key) {
-        // key is a Buffer, that can be serialized however one desires
-        self.callback(null, key);
-      });
+      var key = hkdf.derive('info', 42);
+      self.callback(null, key);
     },
     "derives keys of the right length": function(err, key) {
       assert.equal(key.length, 42);
@@ -23,10 +21,8 @@ suite.addBatch({
     topic: function() {
       var self = this;
       var hkdf = new HKDF('sha256', null, 'initialKeyingMaterial');
-      hkdf.derive('info', 42, function(key) {
-        // key is a Buffer, that can be serialized however one desires
-        self.callback(null, key);
-      });
+      var key = hkdf.derive('info', 42);
+      self.callback(null, key);
     },
     "derives keys of the right length": function(err, key) {
       // expected value generated using:
@@ -47,10 +43,8 @@ suite.addBatch({
       var info = new Buffer("f0f1f2f3f4f5f6f7f8f9", 'hex');
 
       var hkdf = new HKDF('sha256', salt, ikm);
-      hkdf.derive(info, 42, function(key) {
-        // key is a Buffer, that can be serialized however one desires
-        self.callback(null, key);
-      });
+      var key = hkdf.derive(info, 42);
+      self.callback(null, key);
     },
     "works": function(err, output) {
       assert.equal(output.toString('hex'), "3cb25f25faacd57a90434f64d0362f2a2d2d0a90cf1a5a4c5db02d56ecc4c5bf34007208d5b887185865");
@@ -65,10 +59,8 @@ suite.addBatch({
       var info = ''; // empty
 
       var hkdf = new HKDF('sha256', salt, ikm);
-      hkdf.derive(info, 42, function(key) {
-        // key is a Buffer, that can be serialized however one desires
-        self.callback(null, key);
-      });
+      var key = hkdf.derive(info, 42);
+      self.callback(null, key);
     },
     "works": function(err, output) {
       assert.equal(output.toString('hex'), "8da4e775a563c18f715f802a063c5a31b8a11f5c5ee1879ec3454e5f3c738d2d9d201395faa4b61a96c8");
